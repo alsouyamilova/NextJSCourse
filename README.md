@@ -1,0 +1,2 @@
+# NextJSCourse
+Next.js app
