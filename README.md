@@ -1,2 +1,1 @@
-# NextJSCourse
-Next.js app
+App developed during the course on Next.js

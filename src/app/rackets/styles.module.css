@@ -1,0 +1,277 @@
+/* Контейнер страницы */
+.container {
+  display: flex;
+  min-height: 100%;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Левая колонка с фильтрами */
+.sidebar {
+  width: 25%;
+  min-width: 250px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.filtersTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #0070f3;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filterGroupTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+  margin: 0;
+}
+
+.brandFilters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filterItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.filterItem:hover {
+  background-color: #e9ecef;
+}
+
+.filterItem input[type="radio"] {
+  margin: 0;
+  accent-color: #0070f3;
+}
+
+.filterItem span {
+  color: #666;
+  font-weight: 500;
+}
+
+/* Правая колонка с карточками */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.count {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+  background-color: #e9ecef;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+/* Сетка карточек */
+.racketsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Карточка ракетки */
+.racketCard {
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.racketCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.cardImage {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.racketImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.racketCard:hover .racketImage {
+  transform: scale(1.05);
+}
+
+.cardContent {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.racketName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.brandName {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #0070f3;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.racketPrice {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #28a745;
+  margin: 0;
+}
+
+.racketDescription {
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .sidebar {
+    width: 100%;
+    position: static;
+    min-width: auto;
+  }
+  
+  .racketsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .racketsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .racketCard {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.75rem;
+  }
+  
+  .sidebar {
+    padding: 1rem;
+  }
+  
+  .filtersTitle {
+    font-size: 1.1rem;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+  }
+  
+  .cardContent {
+    padding: 1rem;
+  }
+  
+  .racketName {
+    font-size: 1rem;
+  }
+  
+  .racketPrice {
+    font-size: 1.1rem;
+  }
+}
