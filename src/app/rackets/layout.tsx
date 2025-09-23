@@ -5,12 +5,7 @@ const AboutLayout: FC<
     children: React.ReactNode;
   }>
 > = ({ children }) => {
-  return (
-    // <div>
-    //   <div>Rackets Layout</div>
-    <div>{children}</div>
-    // </div>
-  );
+  return <div>{children}</div>;
 };
 
 export default AboutLayout;

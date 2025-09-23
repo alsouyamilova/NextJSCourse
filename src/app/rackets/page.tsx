@@ -1,16 +1,9 @@
 "use client";
 import { FC, useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Form,
-  Badge,
-  Alert,
-  Image,
-} from "react-bootstrap";
+import { Container, Row, Col, Card, Form, Badge } from "react-bootstrap";
 import { rackets } from "../../../public/mock";
+import RacketCard from "./racketCard";
+import styles from "./page.module.css";
 
 const Page: FC = () => {
   const [selectedBrand, setSelectedBrand] = useState<string>("all");
@@ -30,14 +23,14 @@ const Page: FC = () => {
     <Container fluid className="py-4">
       <Row>
         <Col md={3}>
-          <Card className="mb-4">
+          <Card>
             <Card.Header>
-              <h5 className="mb-0">Фильтры</h5>
+              <h5>Фильтры</h5>
             </Card.Header>
             <Card.Body>
               <Form>
-                <Form.Group className="mb-3">
-                  <Form.Label className="fw-bold">Бренд</Form.Label>
+                <Form.Group>
+                  <Form.Label>Бренд</Form.Label>
                   <Form.Check
                     type="radio"
                     label="Все бренды"
@@ -66,45 +59,16 @@ const Page: FC = () => {
         </Col>
 
         <Col md={9}>
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <h1 className="mb-0">Теннисные ракетки</h1>
-            <Badge bg="info" className="fs-6">
-              Найдено: {filteredRackets.length} ракеток
-            </Badge>
+          <div className={styles.flexlabel}>
+            <h1>Теннисные ракетки</h1>
+            <Badge bg="info">Найдено: {filteredRackets.length} ракеток</Badge>
           </div>
 
           {filteredRackets.length === 0 ? null : (
             <Row>
               {filteredRackets.map((racket) => (
                 <Col key={racket.id} lg={4} md={6} className="mb-4">
-                  <Card className="h-100 shadow-sm">
-                    <div
-                      className="text-center p-3"
-                      style={{ height: "200px", backgroundColor: "#f8f9fa" }}
-                    >
-                      <Image
-                        src={racket.imageUrl}
-                        alt={racket.name}
-                        className="img-fluid"
-                        style={{
-                          height: "100%",
-                          objectFit: "contain",
-                          maxWidth: "100%",
-                        }}
-                      />
-                    </div>
-                    <Card.Body className="d-flex flex-column">
-                      <Card.Title className="h6 mb-2">{racket.name}</Card.Title>
-                      <Badge bg="primary" className="mb-2 w-fit-content">
-                        {racket.brand.name}
-                      </Badge>
-                      <div className="d-flex justify-content-between align-items-center mt-auto">
-                        <span className="h5 text-success mb-0">
-                          ${racket.price}
-                        </span>
-                      </div>
-                    </Card.Body>
-                  </Card>
+                  <RacketCard key={racket.id} racket={racket} />
                 </Col>
               ))}
             </Row>

@@ -1,0 +1,32 @@
+import React, { FC } from "react";
+import styles from "./styles.module.css";
+
+interface Racket {
+  id: string;
+  name: string;
+  price: number;
+  imageUrl: string;
+  brand: {
+    id: string;
+    name: string;
+  };
+}
+
+const RacketCard: FC<{ racket: Racket }> = ({ racket }) => {
+  return (
+    <div className={styles.card}>
+      <div className={styles.imageContainer}>
+        <img src={racket.imageUrl} alt={racket.name} className={styles.image} />
+      </div>
+      <div className={styles.cardBody}>
+        <h3 className={styles.title}>{racket.name}</h3>
+        <span className={styles.badge}>{racket.brand.name}</span>
+        <div className={styles.priceContainer}>
+          <span className={styles.price}>${racket.price}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default RacketCard;
