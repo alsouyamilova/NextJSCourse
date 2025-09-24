@@ -1,7 +1,7 @@
-import React, { FC } from "react";
+import React from "react";
 import styles from "./styles.module.css";
 
-interface Racket {
+type Racket = {
   id: string;
   name: string;
   price: number;
@@ -10,8 +10,9 @@ interface Racket {
     id: string;
     name: string;
   };
-}
-const MainRacketsCard: FC<{ racket: Racket }> = ({ racket }) => {
+};
+
+const MainRacketsCard = ({ racket }: { racket: Racket }) => {
   return (
     <div className={styles.cardWrapper}>
       <div className={styles.card}>

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import styles from "./styles.module.css";
 
-interface Racket {
+type Racket = {
   id: string;
   name: string;
   price: number;
@@ -10,9 +10,9 @@ interface Racket {
     id: string;
     name: string;
   };
-}
+};
 
-const RacketCard: FC<{ racket: Racket }> = ({ racket }) => {
+const RacketCard = ({ racket }: { racket: Racket }) => {
   return (
     <div className={styles.card}>
       <div className={styles.imageContainer}>

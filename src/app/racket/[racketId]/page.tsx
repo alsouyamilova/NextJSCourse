@@ -1,4 +1,3 @@
-import { FC } from "react";
 import styles from "./styles.module.css";
 
 import { rackets } from "../../../../public/mock";
@@ -13,7 +12,7 @@ export const generateStaticParams = () => {
   }));
 };
 
-const RacketPage: FC<Props> = async ({ params }) => {
+const RacketPage = async ({ params }: Props) => {
   const { racketId } = await params;
   const racket = rackets.find((racket) => String(racket.id) === racketId);
 
