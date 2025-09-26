@@ -1,20 +1,23 @@
-import { FC } from "react";
-import { rackets } from "../../public/mock";
+import { FC, Suspense } from "react";
 import styles from "./styles.module.css";
-import MainRacketsCard from "./mainRacketsCard";
-export const generateStaticParams = () => {
-  return rackets
-    .filter((racket) => [1, 2, 3].includes(racket.id))
-    .map((racket) => ({
-      id: racket.id.toString(),
-    }));
-};
-const Page: FC = () => {
+import MainRacketsCard from "./components/racketsCard/mainRacketsCard";
+import { getRackets } from "@/services/get-rackets";
+import { getTop10Rackets } from "@/services/get-top-10";
+import Loading from "./loading";
+import { notFound } from "next/navigation";
+
+const Page: FC = async () => {
+  const racketsPromise = getRackets({ page: 1, limit: 10 });
+  const top10Promise = getTop10Rackets();
+  const [rackets, top10Res] = await Promise.all([racketsPromise, top10Promise]);
+
+  if (!rackets.data || !top10Res.data) {
+    return notFound();
+  }
+
   // Фильтруем ракетки, оставляем только с id 1, 2, 3
-  const filteredRackets = rackets.filter((racket) =>
-    [1, 2, 3].includes(racket.id)
-  );
-  if (filteredRackets.length === 0) {
+
+  if (rackets.data.length === 0) {
     return (
       <div className={styles.container}>
         <div className={styles.content}>
@@ -26,15 +29,26 @@ const Page: FC = () => {
     );
   }
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <div className={styles.grid}>
-          {filteredRackets.map((racket) => (
-            <MainRacketsCard key={racket.id} racket={racket} />
-          ))}
+    <Suspense fallback={<Loading />}>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <div className={styles.sectionTitle}>Топ 10</div>
+          <hr></hr>
+          <div className={styles.grid}>
+            {top10Res.data.map((racket) => (
+              <MainRacketsCard key={racket.id} racket={racket} />
+            ))}
+          </div>
+          <div className={styles.sectionTitle}>Каталог</div>
+          <hr></hr>
+          <div className={styles.grid}>
+            {rackets.data.map((racket) => (
+              <MainRacketsCard key={racket.id} racket={racket} />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </Suspense>
   );
 };
 

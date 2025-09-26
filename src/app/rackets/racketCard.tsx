@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import styles from "./styles.module.css";
+import React from "react";
+import styles from "./cardstyles.module.css";
 
 type Racket = {
   id: string;

@@ -1,81 +1,80 @@
-"use client";
-import { FC, useState } from "react";
-import { Container, Row, Col, Card, Form, Badge } from "react-bootstrap";
-import { rackets } from "../../../public/mock";
 import RacketCard from "./racketCard";
 import styles from "./page.module.css";
+import { getRackets } from "@/services/get-rackets";
 
-const Page: FC = () => {
-  const [selectedBrand, setSelectedBrand] = useState<string>("all");
+export default async function RacketsPage() {
+  const { isError, data: rackets } = await getRackets({ page: 1, limit: 20 });
+
+  if (isError) {
+    return "error";
+  }
+  if (!rackets) {
+    return <div className={styles.noResults}>no result found</div>;
+  }
 
   // Получаем уникальные бренды
   const brands = Array.from(
     new Set(rackets.map((racket) => racket.brand.name))
   );
 
-  // Фильтруем ракетки по выбранному бренду
-  const filteredRackets =
-    selectedBrand === "all"
-      ? rackets
-      : rackets.filter((racket) => racket.brand.name === selectedBrand);
-
   return (
-    <Container fluid className="py-4">
-      <Row>
-        <Col md={3}>
-          <Card>
-            <Card.Header>
-              <h5>Фильтры</h5>
-            </Card.Header>
-            <Card.Body>
-              <Form>
-                <Form.Group>
-                  <Form.Label>Бренд</Form.Label>
-                  <Form.Check
-                    type="radio"
-                    label="Все бренды"
-                    name="brand"
-                    value="all"
-                    checked={selectedBrand === "all"}
-                    onChange={(e) => setSelectedBrand(e.target.value)}
-                    className="mb-2"
-                  />
-                  {brands.map((brand) => (
-                    <Form.Check
-                      key={brand}
-                      type="radio"
-                      label={brand}
-                      name="brand"
-                      value={brand}
-                      checked={selectedBrand === brand}
-                      onChange={(e) => setSelectedBrand(e.target.value)}
-                      className="mb-2"
-                    />
-                  ))}
-                </Form.Group>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col md={9}>
-          <div className={styles.flexlabel}>
-            <h1>Теннисные ракетки</h1>
-            <Badge bg="info">Найдено: {filteredRackets.length} ракеток</Badge>
+    <div className={styles.container}>
+      <div className={styles.sidebar}>
+        <div className={styles.card}>
+          <div className={styles.cardHeader}>
+            <h5>Фильтры</h5>
           </div>
+          <div className={styles.cardBody}>
+            <form className={styles.form}>
+              <div className={styles.formGroup}>
+                <label className={styles.formLabel}>Бренд</label>
+                <div className={styles.radioGroup}>
+                  <label className={styles.radioLabel}>
+                    <input
+                      type="radio"
+                      name="brand"
+                      value="all"
+                      className={styles.radioInput}
+                    />
+                    <span className={styles.radioCustom}></span>
+                    Все бренды
+                  </label>
+                  {brands.map((brand) => (
+                    <label key={brand} className={styles.radioLabel}>
+                      <input
+                        type="radio"
+                        name="brand"
+                        value={brand}
+                        className={styles.radioInput}
+                      />
+                      <span className={styles.radioCustom}></span>
+                      {brand}
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <h2>Теннисные ракетки</h2>
+          <span className={styles.badge}>
+            Найдено: {rackets.length} ракеток
+          </span>
+        </div>
 
-          {filteredRackets.length === 0 ? null : (
-            <Row>
-              {filteredRackets.map((racket) => (
-                <Col key={racket.id} lg={4} md={6} className="mb-4">
-                  <RacketCard key={racket.id} racket={racket} />
-                </Col>
-              ))}
-            </Row>
-          )}
-        </Col>
-      </Row>
-    </Container>
+        {rackets.length === 0 ? null : (
+          <div className={styles.racketsGrid}>
+            {rackets.map((racket) => (
+              <div key={racket.id} className={styles.racketItem}>
+                <RacketCard racket={racket} />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
-};
-export default Page;
+}

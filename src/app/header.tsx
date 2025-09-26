@@ -2,7 +2,7 @@
 import React, { FC } from "react";
 import styles from "./styles.module.css";
 import Link from "next/link";
-import HeaderLink from "./link";
+import HeaderLink from "./components/headerLink/link";
 
 const Header: FC = () => {
   return (
@@ -14,6 +14,7 @@ const Header: FC = () => {
         <nav className={styles.nav}>
           <HeaderLink pathName={"/"} label={"Главная"} />
           <HeaderLink pathName={"/rackets"} label={"Ракетки"} />
+          <HeaderLink pathName={"/top10"} label={"Топ-10"} />
         </nav>
       </div>
     </header>

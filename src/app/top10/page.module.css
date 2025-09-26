@@ -1,0 +1,32 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 2rem;
+  justify-content: center;
+  max-width: 1500px;
+}
+
+.racketsGrid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.racketItem {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.racketItem:hover {
+  transform: translateY(-2px);
+}
+
+/* No Results */
+.noResults {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.125rem;
+  color: #718096;
+  background: #f7fafc;
+  border-radius: 8px;
+  margin: 2rem 0;
+}
