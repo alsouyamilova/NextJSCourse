@@ -2,6 +2,9 @@ import RacketCard from "../rackets/racketCard";
 import styles from "./page.module.css";
 import { getTop10Rackets } from "@/services/get-top-10";
 
+//export const dynamic = "force-dynamic";
+//export const revalidate = 0;
+
 export default async function Top10Page() {
   const { isError, data: rackets } = await getTop10Rackets();
 

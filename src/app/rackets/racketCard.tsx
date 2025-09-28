@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./cardstyles.module.css";
+import Link from "next/link";
 
 type Racket = {
   id: string;
@@ -19,7 +20,10 @@ const RacketCard = ({ racket }: { racket: Racket }) => {
         <img src={racket.imageUrl} alt={racket.name} className={styles.image} />
       </div>
       <div className={styles.cardBody}>
-        <h3 className={styles.title}>{racket.name}</h3>
+        <Link href={`/racket/${racket.id}`}>
+          <h3 className={styles.title}>{racket.name}</h3>
+        </Link>
+
         <span className={styles.badge}>{racket.brand.name}</span>
         <div className={styles.priceContainer}>
           <span className={styles.price}>${racket.price}</span>
