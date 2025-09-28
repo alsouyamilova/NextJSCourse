@@ -31,9 +31,7 @@ const RacketPage = async ({ params }: Props) => {
 
   return (
     <div>
-      <Suspense fallback={<Loading />}>
-        <Racket racket={data} />;
-      </Suspense>
+      <Racket racket={data} />;
     </div>
   );
 };
