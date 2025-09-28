@@ -11,13 +11,11 @@ const Page: FC = async () => {
   const top10Promise = getTop10Rackets();
   const [rackets, top10Res] = await Promise.all([racketsPromise, top10Promise]);
 
-  if (!rackets.data || !top10Res.data) {
+  if (!rackets.data && !top10Res.data) {
     return notFound();
   }
 
-  // Фильтруем ракетки, оставляем только с id 1, 2, 3
-
-  if (rackets.data.length === 0) {
+  if (rackets.data?.length === 0) {
     return (
       <div className={styles.container}>
         <div className={styles.content}>
@@ -35,16 +33,18 @@ const Page: FC = async () => {
           <div className={styles.sectionTitle}>Топ 10</div>
           <hr></hr>
           <div className={styles.grid}>
-            {top10Res.data.map((racket) => (
-              <MainRacketsCard key={racket.id} racket={racket} />
-            ))}
+            {top10Res.data &&
+              top10Res.data.map((racket) => (
+                <MainRacketsCard key={racket.id} racket={racket} />
+              ))}
           </div>
           <div className={styles.sectionTitle}>Каталог</div>
           <hr></hr>
           <div className={styles.grid}>
-            {rackets.data.map((racket) => (
-              <MainRacketsCard key={racket.id} racket={racket} />
-            ))}
+            {rackets.data &&
+              rackets.data.map((racket) => (
+                <MainRacketsCard key={racket.id} racket={racket} />
+              ))}
           </div>
         </div>
       </div>
