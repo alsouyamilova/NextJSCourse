@@ -2,9 +2,13 @@
 import styles from "./styles.module.css";
 const GlobalError = () => {
   return (
-    <div className={styles.notFound}>
-      <div>Ошибка загрузки сайта</div>
-    </div>
+    <html lang="ru">
+      <body>
+        <div className={styles.notFound}>
+          <div>Ошибка загрузки сайта</div>
+        </div>
+      </body>
+    </html>
   );
 };
 
