@@ -1,10 +1,10 @@
 import { FC, Suspense } from "react";
-import styles from "./styles.module.css";
-import MainRacketsCard from "./components/racketsCard/mainRacketsCard";
+import styles from "../styles.module.css";
 import { getRackets } from "@/services/get-rackets";
 import { getTop10Rackets } from "@/services/get-top-10";
-import Loading from "./loading";
 import { notFound } from "next/navigation";
+import MainRacketsCard from "../components/racketsCard/mainRacketsCard";
+import Loading from "../loading";
 
 const Page: FC = async () => {
   const racketsPromise = getRackets({ page: 1, limit: 10 });

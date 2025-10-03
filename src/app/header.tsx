@@ -1,10 +1,13 @@
 "use client";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import styles from "./styles.module.css";
 import Link from "next/link";
 import HeaderLink from "./components/headerLink/link";
+import { UserContext } from "./providers/user-provider";
+import Logout from "./(app)/logout/page";
 
 const Header: FC = () => {
+  const { user } = useContext(UserContext);
   return (
     <header className={styles.header}>
       <div className={styles.headerContent}>
@@ -15,7 +18,16 @@ const Header: FC = () => {
           <HeaderLink pathName={"/"} label={"Главная"} />
           <HeaderLink pathName={"/rackets"} label={"Ракетки"} />
           <HeaderLink pathName={"/top10"} label={"Топ-10"} />
-        </nav>
+          <div className={styles.user}>{user?.login}</div>
+          {user ? (
+            <Logout />
+          ) : (
+            <div className={styles.authButtons}>
+              <Link href="/login">Login</Link>
+              <Link href="/sign-up">Sign up</Link>
+            </div>
+          )}
+        </nav>{" "}
       </div>
     </header>
   );

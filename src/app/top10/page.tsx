@@ -1,4 +1,4 @@
-import RacketCard from "../rackets/racketCard";
+import RacketCard from "../(app)/rackets/racketCard";
 import styles from "./page.module.css";
 import { getTop10Rackets } from "@/services/get-top-10";
 

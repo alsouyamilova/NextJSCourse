@@ -1,3 +1,4 @@
+import { BASE_API_URL } from "@/app/constants/api";
 import { IRacket } from "@/types/racket";
 import { Response } from "@/types/response";
 
@@ -8,7 +9,7 @@ interface Params {
 export const getMetaRacketById = async ({
   id,
 }: Params): Promise<Response<IRacket>> => {
-  const result = await fetch(`http://localhost:4000/api/meta/product/${id}`);
+  const result = await fetch(`${BASE_API_URL}/meta/product/${id}`);
 
   if (result.status === 404) {
     return { isError: false, data: undefined };
