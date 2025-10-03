@@ -1,3 +1,4 @@
+import { BASE_API_URL } from "@/app/constants/api";
 import { IRacket } from "@/types/racket";
 import { Response } from "@/types/response";
 
@@ -11,7 +12,7 @@ export const getRackets = async ({
   limit = 2,
 }: Params): Promise<Response<IRacket[]>> => {
   const result = await fetch(
-    `http://localhost:4000/api/products?page=${page}&limit=${limit}`
+    `${BASE_API_URL}/products?page=${page}&limit=${limit}`
   );
 
   if (result.status === 404) {

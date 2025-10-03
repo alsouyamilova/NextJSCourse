@@ -1,8 +1,9 @@
 import { IRacket } from "@/types/racket";
 import styles from "./styles.module.css";
 import React from "react";
+import { IUser } from "@/types/user";
 
-const Racket = ({ racket }: { racket: IRacket }) => {
+const Racket = ({ racket, user }: { racket: IRacket; user: IUser }) => {
   return (
     <div className={styles.container}>
       <div className={styles.row}>
@@ -21,9 +22,23 @@ const Racket = ({ racket }: { racket: IRacket }) => {
           <div className={styles.infoCard}>
             <div className={styles.cardBody}>
               <div className={styles.badgeContainer}>
-                <span className={styles.brandBadge}>{racket.brand.name}</span>
+                <div className={styles.brandBadge}>{racket.brand.name}</div>
                 {racket.top10 && (
-                  <span className={styles.top10Badge}>Топ-10</span>
+                  <div className={styles.top10Badge}>Топ-10</div>
+                )}
+                {user && (
+                  <button className={styles.heartButton}>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                  </button>
                 )}
               </div>
 

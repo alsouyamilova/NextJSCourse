@@ -3,6 +3,9 @@ import styles from "./styles.module.css";
 import { getRacketById } from "@/services/get-racket-by-id";
 import { notFound } from "next/navigation";
 import { getMetaRacketById } from "@/services/get-meta-racket-by-id";
+import { use, useContext } from "react";
+import { UserContext, UserProvider } from "@/app/providers/user-provider";
+import RacketPageClient from "./page-client";
 
 type Props = {
   params: Promise<{ racketId: string }>;
@@ -49,7 +52,7 @@ const RacketPage = async ({ params }: Props) => {
 
   return (
     <div>
-      <Racket racket={data} />;
+      <RacketPageClient racket={data} />;
     </div>
   );
 };

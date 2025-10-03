@@ -6,6 +6,8 @@ import Footer from "./footer";
 import type { Metadata } from "next";
 import Header from "./header";
 import NextTopLoader from "nextjs-toploader";
+import { UserContext, UserProvider } from "./providers/user-provider";
+import { getUser } from "@/services/get-user";
 export const metadata: Metadata = {
   title: "Tennis rackets shop",
   description: "web app based on Next.js",
@@ -15,14 +17,18 @@ const RootLayout: FC<
   Readonly<{
     children: React.ReactNode;
   }>
-> = ({ children }) => {
+> = async ({ children }) => {
+  const { data } = await getUser();
+  console.log(data);
   return (
     <html lang="ru">
       <body>
-        <NextTopLoader showSpinner={false} />
-        <Header />
-        <main className={styles.main}>{children}</main>
-        <Footer />
+        <UserProvider user={data}>
+          <NextTopLoader showSpinner={false} />
+          <Header />
+          <main className={styles.main}>{children}</main>
+          <Footer />
+        </UserProvider>
       </body>
     </html>
   );

@@ -116,3 +116,43 @@
   gap: 2rem;
   justify-content: center;
 }
+.authButtons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.authButtons a {
+  padding: 0.5rem 1rem;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.authButtons a:hover {
+  border-color: #7f9ec3;
+  text-decoration: none;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Обновленные стили для навигации */
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.user {
+  margin-left: 2rem;
+  padding: 0 16px;
+  color: #333;
+  font-weight: 500;
+  white-space: nowrap;
+}
