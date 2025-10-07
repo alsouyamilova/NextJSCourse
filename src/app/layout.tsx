@@ -19,7 +19,7 @@ const RootLayout: FC<
   }>
 > = async ({ children }) => {
   const { data } = await getUser();
-  console.log(data);
+
   return (
     <html lang="ru">
       <body>

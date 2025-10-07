@@ -38,7 +38,7 @@ const Login = (props) => {
             type="password"
             className={styles.input}
             required
-          ></input>
+          />
         </div>
         {error && <div>{error}</div>}
         <button className={styles.button} disabled={isPending}>
