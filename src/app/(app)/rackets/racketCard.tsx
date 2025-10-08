@@ -1,21 +1,32 @@
-import React from "react";
+"use client";
+import React, { useContext } from "react";
 import styles from "./cardstyles.module.css";
 import Link from "next/link";
+import FavouriteButton from "@/app/components/favouriteButton/FavouriteButton";
+import { UserContext } from "@/app/providers/user-provider";
+import { IRacket } from "@/types/racket";
+import {
+  useHydrateFavorite,
+  useIsFavoriteById,
+} from "@/app/providers/favorite/hooks";
 
-type Racket = {
-  id: string;
-  name: string;
-  price: number;
-  imageUrl: string;
-  brand: {
-    id: string;
-    name: string;
-  };
-};
+const RacketCard = ({ racket }: { racket: IRacket }) => {
+  const { user } = useContext(UserContext);
 
-const RacketCard = ({ racket }: { racket: Racket }) => {
+  useHydrateFavorite({
+    racketId: racket.id,
+    isFavorite: Boolean(racket.userData?.isFavorite),
+  });
+  const isFavoriteGlobal = useIsFavoriteById({
+    id: racket.id,
+    isFavoriteInitial: Boolean(racket.userData?.isFavorite),
+  });
+
   return (
     <div className={styles.card}>
+      {user && (
+        <FavouriteButton productId={racket.id} isFavorite={isFavoriteGlobal} />
+      )}
       <div className={styles.imageContainer}>
         <img src={racket.imageUrl} alt={racket.name} className={styles.image} />
       </div>

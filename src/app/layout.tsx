@@ -8,6 +8,7 @@ import Header from "./header";
 import NextTopLoader from "nextjs-toploader";
 import { UserContext, UserProvider } from "./providers/user-provider";
 import { getUser } from "@/services/get-user";
+import { FavoriteProvider } from "./providers/favorite";
 export const metadata: Metadata = {
   title: "Tennis rackets shop",
   description: "web app based on Next.js",
@@ -24,10 +25,12 @@ const RootLayout: FC<
     <html lang="ru">
       <body>
         <UserProvider user={data}>
-          <NextTopLoader showSpinner={false} />
-          <Header />
-          <main className={styles.main}>{children}</main>
-          <Footer />
+          <FavoriteProvider>
+            <NextTopLoader showSpinner={false} />
+            <Header />
+            <main className={styles.main}>{children}</main>
+            <Footer />
+          </FavoriteProvider>
         </UserProvider>
       </body>
     </html>
