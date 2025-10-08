@@ -1,0 +1,9 @@
+.notFound {
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.notFound div {
+  font-size: 1.25rem;
+  color: #6c757d;
+}

@@ -1,0 +1,28 @@
+.heartButton {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heartButton:hover {
+  background-color: #f5f5f5;
+  color: #e74c3c;
+  transform: scale(1.1);
+}
+
+.isFavorite {
+  color: #e74c3c;
+  transform: scale(1.1);
+}
+
+.heartButton:active {
+  transform: scale(0.95);
+}
