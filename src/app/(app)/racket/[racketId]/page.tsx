@@ -39,11 +39,7 @@ const RacketPage = async ({ params }: Props) => {
   const { isError, data } = await getRacketById({ id: racketId });
 
   if (isError) {
-    return (
-      <div className={styles.notFound}>
-        <div>Ошибка</div>
-      </div>
-    );
+    throw new Error();
   }
 
   if (!data) {
